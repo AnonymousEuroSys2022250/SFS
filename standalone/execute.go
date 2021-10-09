@@ -1,15 +1,12 @@
 package main
 
 import(
-	"os/exec"
 	"time"
 	"fmt"
 	"log"
 	"sync"
 	"strconv"
-	"os"
-	"syscall"
-	//"runtime/debug"
+	"os/exec"
 )
 
 type PidI struct{
@@ -39,11 +36,6 @@ func Execute(job PidI, p string, pids chan PidI, core string, queue chan PidI){
 		//cmd = exec.Command("schedtool","-N","-a",core,"-e","python","fib.py", strconv.Itoa(job.N))
 		cmd = exec.Command("schedtool","-F","-p","20","-a",core,"-e","python","fib.py", strconv.Itoa(job.N),strconv.Itoa(job.Id))
 	}
-	//fmt.Println("logs exec start time
-	cmd.Env = os.Environ()
-  	cmd.SysProcAttr = &syscall.SysProcAttr{
-    		Pdeathsig: syscall.SIGTERM,
-  	}
 	err := cmd.Start()
 	if err != nil{
 		log.Fatal("logs exec 1", err)
