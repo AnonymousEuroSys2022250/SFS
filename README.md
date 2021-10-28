@@ -2,7 +2,7 @@
 
 ### requirement
 
-go version == 1.
+go version == 1.17.2
 
 ### standalone
 
